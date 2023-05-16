@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Clone repo') {
             steps {
-                git credentialsId: 'vagrant_git', url: 'https://github.com/Gnomina/wordpress.git'
+                git credentialsId: 'User_pass', url: 'https://github.com/Gnomina/wordpress.git'
             }
         }
         stage('Terraform init') {
