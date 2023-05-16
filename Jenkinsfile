@@ -15,8 +15,7 @@ pipeline {
         stage('Clone repo') {
             steps {
                 script {
-                    def gitCredentials.id = credentials('45172d7c-aca7-4265-97d7-84fb6469d07a')
-                    git credentialsId: gitCredentials.id, url: 'https://github.com/Gnomina/wordpress.git'
+                    git credentialsId: '45172d7c-aca7-4265-97d7-84fb6469d07a', url: 'https://github.com/Gnomina/wordpress.git'
                 }
             }
         }
