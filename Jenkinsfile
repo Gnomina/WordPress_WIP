@@ -2,11 +2,12 @@ pipeline {
     agent any
 
     stages {
-        stage('Clean workspace') {
+        stage('Hello') {
             steps {
-               sh 'rm -rf /path/to/workspace/*'
+                echo 'Terraform test'
             }
         }
+       
         stage('Clone repo') {
             steps {
                git branch: 'main', url: 'https://github.com/Gnomina/wordpress.git'
