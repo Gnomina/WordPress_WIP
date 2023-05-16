@@ -9,17 +9,17 @@ pipeline {
         }
         stage('Clean workspace') {
             steps {
-               sh 'rm -rf /path/to/workspace/*'
+                sh 'rm -rf /path/to/workspace/*'
             }
-       }
+        }
         stage('Clone repo') {
             steps {
                 script {
                     def gitCredentials = credentials('45172d7c-aca7-4265-97d7-84fb6469d07a')
                     git credentialsId: gitCredentials.id, url: 'https://github.com/Gnomina/wordpress.git'
-      }
-   }
-}
+                }
+            }
+        }
         stage('Terraform init') {
             steps {
                 sh 'terraform init'
@@ -32,6 +32,5 @@ pipeline {
                 echo 'ok'
             }
         }
-        
     }
-}      
+}
