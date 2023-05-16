@@ -11,5 +11,17 @@ pipeline {
                 }
             }     
         }
+
+
+
+
+
+
+
+        stage('CLEAN_WORKSPACE') {
+            steps {
+               cleanWs()
+            }
+        }
     }
 }
