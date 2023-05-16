@@ -3,9 +3,8 @@ pipeline {
     
     stages {
         stage('Clone') {
-      // Clones the repository from the current branch name
             steps {
-                git url: "https://github.com/Gnomina/WordPress_WIP.git"
+                sh 'git clone https://github.com/Gnomina/WordPress_WIP.git'
             }     
         }
     }
