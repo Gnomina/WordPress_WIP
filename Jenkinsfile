@@ -12,7 +12,7 @@ pipeline {
         stage('Clone') {
             steps {
                 withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {
-                    git url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
+                    git branch: 'main', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
                 }
             }     
