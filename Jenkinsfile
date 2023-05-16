@@ -14,8 +14,9 @@ pipeline {
        }
         stage('Clone repo') {
             steps {
-               credentialsId: 'e2f9973a-276b-45c7-bde0-9dd598a155e2',
+               withCredentials([usernamePassword(credentialsId: 'e2f9973a-276b-45c7-bde0-9dd598a155e2', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
                git branch: 'main', url: 'https://github.com/Gnomina/wordpress.git'
+               }
             }
         }
         stage('Terraform init') {
