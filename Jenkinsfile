@@ -4,10 +4,9 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'vagrant_git', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                     git branch: 'main', url: 'https://github.com/Gnomina/wordpress.git'
-                    }
-               
+                withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {
+                    sh "git clone https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
+                }
             }     
         }
     }
