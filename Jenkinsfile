@@ -1,33 +1,18 @@
 pipeline {
+    String branchName = env.BRANCH_NAME
+    String gitCredentials = "45172d7c-aca7-4265-97d7-84fb6469d07a"
+    String repoUrl = "https://github.com/Gnomina/WordPress_WIP.git"
+
     agent any
 
-    stages {
-        stage('START') {
-            steps {
-                echo 'Start_Init'
-            }
-        }
-        stage('Clean workspace') {
-            steps {
-                sh 'rm -rf /path/to/workspace/*'
-            }
-        }
-        stage('Clone repo') {
-            steps {
-                git credentialsId: 'User_pass', url: 'https://github.com/Gnomina/wordpress.git'
-            }
-        }
-        stage('Terraform init') {
-            steps {
-                sh 'terraform init'
-                echo 'ok'
-            }
-        }
-        stage('Terraform plan') {
-            steps {
-                sh 'terraform plan'
-                echo 'ok'
-            }
-        }
-    }
+    stage('Clone') {
+      // Clones the repository from the current branch name
+      echo 'Make the output directory'
+      sh 'mkdir -p build'
+
+      echo 'Cloning files from (branch: "' + branchName + '" )'
+      dir('build') {
+          git branch: branchName, credentialsId: 	gitCredentials, url: repoUrl
+      }     
+  }
 }
