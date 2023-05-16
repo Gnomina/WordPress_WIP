@@ -2,6 +2,12 @@ pipeline {
     agent any
     
     stages {
+        stage('Clean workspace') {
+            steps {
+               sh 'rm -rf ${WORKSPACE}*'
+
+            }
+        }
         stage('Clone') {
             steps {
                 withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {
