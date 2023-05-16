@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('START') {
             steps {
-                echo 'Terraform test'
+                echo 'Start_Init'
             }
         }
         stage('Clean workspace') {
@@ -14,6 +14,7 @@ pipeline {
        }
         stage('Clone repo') {
             steps {
+               credentialsId: 'e2f9973a-276b-45c7-bde0-9dd598a155e2',
                git branch: 'main', url: 'https://github.com/Gnomina/wordpress.git'
             }
         }
@@ -29,11 +30,6 @@ pipeline {
                 echo 'ok'
             }
         }
-        stage('Terraform apply') {
-            steps {
-                sh 'terraform apply -auto-approve'
-                echo 'ok'
-            }
-        }
+        
     }
 }      
