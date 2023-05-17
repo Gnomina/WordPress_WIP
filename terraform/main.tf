@@ -1,6 +1,4 @@
 provider "aws" {
-  access_key = "AKIAUEP3PLHSRMTXTX7F"
-  secret_key = "35s/aLj1FpxIWxj1gagiBH/OE8fLbYqnV73FUEdo"
   region     = "eu-central-1"
 }
 
@@ -11,3 +9,18 @@ resource "aws_instance" "example"{
   tags                   = {"Name" = "Terraform"}
   vpc_security_group_ids = ["sg-0a62d8f422094f3b6"]
 }
+
+output "instance_public_ip" {
+  value = aws_instance.example.public_ip
+ }
+ 
+resource "null_resource" "save_instance_ip" {
+  provisioner "local-exec" {
+    command = "echo ${aws_instance.example.public_ip} > instance_public_ip.txt"
+    //command = "echo ${aws_instance.example.private_ip} >> instance_public_ip.txt"
+  }
+}
+
+//output "instance_private_ip" {
+//  value = aws_instance.example.private_ip
+//}
