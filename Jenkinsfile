@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCESS_KEY_ID     = credentials('your-credentials-id').accessKeyId
-        AWS_SECRET_ACCESS_KEY = credentials('your-credentials-id').secretAccessKey
+        AWS_ACCESS_KEY_ID     = "${credentials('your-credentials-id').accessKeyId}"
+        AWS_SECRET_ACCESS_KEY = "${credentials('your-credentials-id').secretAccessKey}"
     }
     
     stages {
