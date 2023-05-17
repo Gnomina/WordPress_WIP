@@ -51,7 +51,13 @@ pipeline {
                             echo 'ok'
                          }
                     }
-                }       
+                } 
+                stage("Instance_ip_save"){
+                    steps{  
+                        sh 'terraform output instance_public_ip > public_ip.txt'
+
+                    }   
+                } 
             }
         }
     }
