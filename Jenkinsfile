@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('your-credentials-id').accessKeyId
+        AWS_SECRET_ACCESS_KEY = credentials('your-credentials-id').secretAccessKey
+    }
     
     stages {
         stage('CLEAN_WORKSPACE') { // Очистка рабочей директории в начале работы па плайна.
@@ -15,6 +19,24 @@ pipeline {
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
                 }
             }     
+        }
+        stage('Terraform init') {
+            steps {
+                sh 'terraform init'
+                echo 'ok'
+            }
+        }
+        stage('Terraform plan') {
+            steps {
+                sh 'terraform plan'
+                echo 'ok'
+            }
+        }
+        stage('Terraform apply') {
+            steps {
+                sh 'terraform apply -auto-approve'
+                echo 'ok'
+            }
         }
 
 
