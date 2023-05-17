@@ -8,13 +8,40 @@ resource "aws_instance" "example"{
   key_name               = "WebAcademy_SSH_Key"
   //tags                   = {"Name" = "Terraform"}
   
-  locals {
-    branch_name = chomp(shellscript("git rev-parse --abbrev-ref HEAD"))
-    commit_hash = chomp(shellscript("git rev-parse --short HEAD"))
+  provisioner "local-exec" {
+    command = "git rev-parse --abbrev-ref HEAD"
+    interpreter = ["bash", "-c"]
+    environment = {
+      BRANCH = ""
+    }
+
+    on_start = ["echo Setting environment variable BRANCH", "export BRANCH=$(git rev-parse --abbrev-ref HEAD)"]
+    on_failure = ["echo Failure: $BRANCH"]
+    on_success = ["echo Success: $BRANCH"]
+
+    environment = {
+      BRANCH = ""
+    }
+  }
+
+  provisioner "local-exec" {
+    command = "git rev-parse --short HEAD"
+    interpreter = ["bash", "-c"]
+    environment = {
+      COMMIT = ""
+    }
+
+    on_start = ["echo Setting environment variable COMMIT", "export COMMIT=$(git rev-parse --short HEAD)"]
+    on_failure = ["echo Failure: $COMMIT"]
+    on_success = ["echo Success: $COMMIT"]
+
+    environment = {
+      COMMIT = ""
+    }
   }
 
   tags = {
-    "Name" = "Branch-${local.branch_name}-Commit-${local.commit_hash}"
+    "Name" = "Branch-${local-exec.git_rev_parse.env.BRANCH}-Commit-${local-exec.git_rev_parse.env.COMMIT}"
   }
   
   
