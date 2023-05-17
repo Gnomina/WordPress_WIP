@@ -23,10 +23,9 @@ pipeline {
                 credentialsId: 'AWS_TOKEN',
                 accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                    steps {
-                        sh 'terraform init'
-                        echo 'ok'
-                    }
+                    sh 'terraform init'
+                    echo 'ok'
+                    
                 }
                 
             }
