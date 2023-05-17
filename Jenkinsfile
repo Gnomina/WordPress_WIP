@@ -8,7 +8,7 @@ pipeline {
                cleanWs()
             }
         }
-        stage('Clone_Github_repo') {
+        stage('Clone_Github_repo and commit message') {
             steps {
                 withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {
                     git branch: 'add_aws_cred_terraform_test', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
@@ -18,7 +18,7 @@ pipeline {
                 }
             }  
         }
-        stage('Repo name'){
+        stage('branch name variable'){
             steps{
                 script {
                     def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
