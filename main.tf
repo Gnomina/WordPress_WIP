@@ -8,32 +8,9 @@ resource "aws_instance" "example"{
   key_name               = "WebAcademy_SSH_Key"
   //tags                   = {"Name" = "Terraform"}
   
-  provisioner "local-exec" {
-    command     = "git rev-parse --abbrev-ref HEAD"
-    interpreter = ["bash", "-c"]
-
-    environment = {
-      BRANCH = ""
-    }
-
-    on_failure = "continue"
-    on_success = "continue"
-  }
-
-  provisioner "local-exec" {
-    command     = "git rev-parse --short HEAD"
-    interpreter = ["bash", "-c"]
-
-    environment = {
-      COMMIT = ""
-    }
-
-    on_failure = "continue"
-    on_success = "continue"
-  }
-
+  
   tags = {
-    "Name" = "Branch-${chomp(`git rev-parse --abbrev-ref HEAD`)}-Commit-${chomp(`git rev-parse --short HEAD`)}"
+    "Name" = sh "git rev-parse --abbrev-ref HEAD"
   }
   
   
