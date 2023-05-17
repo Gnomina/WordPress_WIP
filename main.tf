@@ -8,9 +8,7 @@ resource "aws_instance" "example"{
   key_name               = "WebAcademy_SSH_Key"
   //tags                   = {"Name" = "Terraform"}
   tags = {
-    "Name"        = "Terraform"
-    "Branch"      = "${chomp(`git rev-parse --abbrev-ref HEAD`)}"
-    "Commit"      = "${chomp(`git rev-parse --short HEAD`)}"
+    "Name"   = "Branch-${chomp(`git rev-parse --abbrev-ref HEAD`)}-Commit-${chomp(`git rev-parse --short HEAD`)}"
   vpc_security_group_ids = ["sg-0a62d8f422094f3b6"]
 }
 output "instance_public_ip" {
