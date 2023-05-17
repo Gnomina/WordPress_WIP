@@ -1,10 +1,9 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCESS_KEY_ID     = "${credentials('your-credentials-id').accessKeyId}"
-        AWS_SECRET_ACCESS_KEY = "${credentials('your-credentials-id').secretAccessKey}"
-    }
-    
+        AWS_ACCESS_KEY_ID     = "${credentials('AKIAUEP3PLHS3D5LSZWX').accessKeyId}"
+        AWS_SECRET_ACCESS_KEY = "${credentials('AKIAUEP3PLHS3D5LSZWX').secretAccessKey}"
+    }    
     stages {
         stage('CLEAN_WORKSPACE') { // Очистка рабочей директории в начале работы па плайна.
             steps {
