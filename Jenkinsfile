@@ -15,6 +15,8 @@ pipeline {
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
                 }
             }  
+        }
+        stage('Repo name'){
             steps{
                 sh "git rev-parse --abbrev-ref HEAD > branche_name.txt"
             }   
