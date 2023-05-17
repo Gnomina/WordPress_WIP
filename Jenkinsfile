@@ -18,18 +18,23 @@ pipeline {
             }     
         }
         stage("AWS_Demo"){
-            steps{
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-                credentialsId: 'AWS_TOKEN',
-                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                    sh 'terraform init'
-                    echo 'ok'
-                    
-                }
-                
+
+
+            environment {
+                AWS_CREDENTIALS = credentials('AWS_TOKEN')
+                AWS_ACCESS_KEY_ID = AWS_CREDENTIALS.accessKey
+                AWS_SECRET_ACCESS_KEY = AWS_CREDENTIALS.secretKey
+            }
+            stages{
+                stage("Terraform Init"){
+                    steps{
+                        withAWS(credentials: 'AWS_TOKEN'){
+                            sh 'terraform init'
+                            echo 'ok'
+                        }
+                    }
+                }   
             }
         }
-        
     }
 }
