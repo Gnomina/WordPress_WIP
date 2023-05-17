@@ -22,8 +22,8 @@ pipeline {
 
             environment {
                 AWS_CREDENTIALS = credentials('AWS_TOKEN')
-                AWS_ACCESS_KEY_ID = "${AWS_CREDENTIALS.accessKey}"
-                AWS_SECRET_ACCESS_KEY = "${AWS_CREDENTIALS.secretKey}"
+                AWS_ACCESS_KEY_ID = ${AWS_CREDENTIALS.accessKey}
+                AWS_SECRET_ACCESS_KEY = ${AWS_CREDENTIALS.secretKey}
             }
             stages{
                 stage("Terraform Init"){
