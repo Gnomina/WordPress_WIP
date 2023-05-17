@@ -13,6 +13,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {
                     git branch: 'add_aws_cred_terraform_test', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
+                    sh "commitMessage=$(git log -1 --pretty=%B)"
+                    echo "Commit Message: $commitMessage"
                 }
             }  
         }
@@ -44,7 +46,7 @@ pipeline {
                         credentialsId: 'AWS_TOKEN',
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                            sh 'terraform plan'
+                            sh 'terraform plan -var='branch_name=${branchName}''
                             echo 'ok'
                          }
                     }
@@ -55,7 +57,7 @@ pipeline {
                         credentialsId: 'AWS_TOKEN',
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                            sh "terraform apply  -var='branch_name=${branchName}' -auto-approve"
+                            sh "terraform apply -auto-approve"
                             echo 'ok'
                          }
                     }
