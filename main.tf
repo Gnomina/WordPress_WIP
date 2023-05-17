@@ -1,9 +1,7 @@
 provider "aws" {
   region                 = "eu-central-1"
 }
-data "external" "git-branch" {
-    program = ["/bin/bash", "-c", "jq -n --arg branch `git rev-parse --abbrev-ref HEAD` '{\"branch\":$branch}'"]
-}
+
 
 data "external" "git-branch" {
   program = ["bash", "-c", "echo '{\"branch\":\"'$(git rev-parse --abbrev-ref HEAD)'\"}'"]
