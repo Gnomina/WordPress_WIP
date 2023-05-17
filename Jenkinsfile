@@ -46,7 +46,7 @@ pipeline {
                         credentialsId: 'AWS_TOKEN',
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                            sh "terraform plan -var='branch_name=${branchName}'"
+                            sh "terraform plan -var='branch_name=${branch_Name}'"
                             echo 'ok'
                          }
                     }
