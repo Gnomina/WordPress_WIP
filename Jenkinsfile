@@ -8,7 +8,6 @@ pipeline {
                cleanWs()
             }
         }
-        
         stage('Clone') {
             steps {
                 withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {
@@ -17,15 +16,17 @@ pipeline {
                 }
             }     
         }
-        stage("AWS_Demo"){
-                        
+        stage("AWS_Terrafirm"){
             stages{
                 stage("Terraform Init"){
                     steps{
-                        withAWS(credentials: 'AWS_TOKEN'){
+                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
+                        credentialsId: 'AWS_TOKEN',
+                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
                             sh 'terraform init'
                             echo 'ok'
-                        }
+                         }
                     }
                 }   
             }
