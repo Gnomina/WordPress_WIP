@@ -18,8 +18,10 @@ pipeline {
         }
         stage('Repo name'){
             steps{
-                sh "git rev-parse --abbrev-ref HEAD > branche_name.txt"
-            }   
+                script {
+            def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+            env.branch_name = branchName
+        }
         }
 
         stage("AWS_Terraform"){
@@ -52,7 +54,7 @@ pipeline {
                         credentialsId: 'AWS_TOKEN',
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                            sh 'terraform apply -auto-approve'
+                            sh "terraform apply  -var='branch_name=${branchName}' -auto-approve"
                             echo 'ok'
                          }
                     }
