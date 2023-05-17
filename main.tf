@@ -11,6 +11,11 @@ resource "aws_instance" "example"{
 }
 output "instance_public_ip" {
   value = aws_instance.example.public_ip
+ }
+ resource "null_resource" "save_instance_ip" {
+  provisioner "local-exec" {
+    command = "echo ${aws_instance.example.public_ip} > instance_public_ip.txt"
+  }
 }
 
 output "instance_private_ip" {
