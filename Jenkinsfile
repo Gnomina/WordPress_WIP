@@ -8,17 +8,17 @@ pipeline {
                cleanWs()
             }
         }
-        stage('Clone_Github_repo and commit message') {
+        stage('Clone_Github_repo') {
             steps {
                 withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {
                     git branch: 'add_aws_cred_terraform_test', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
                     sh 'commitMessage=$(git log -1 --pretty=%B)'
-                    echo "Commit Message: $commitMessage"
+                    echo 'Commit Message: $commitMessage'
                 }
             }  
         }
-        stage('branch name variable'){
+        stage('Repo name'){
             steps{
                 script {
                     def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
@@ -64,16 +64,8 @@ pipeline {
                 } 
                 stage("Instance_ip_save"){
                     steps{  
-                        script {
-                            def publicIp = sh(
-                            script: 'terraform output instance_public_ip',
-                            returnStdout: true
-                            ).trim()
-      
-                            echo "Public IP: ${publicIp}"
-                            
-                            sh 'terraform output instance_public_ip > public_ip.txt'
-                        }
+                        sh 'terraform output instance_public_ip > public_ip.txt'
+
                     }   
                 } 
             }
