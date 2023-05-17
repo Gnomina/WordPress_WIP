@@ -9,15 +9,15 @@ resource "aws_instance" "example"{
   //tags                   = {"Name" = "Terraform"}
   
   provisioner "local-exec" {
-    command = "git rev-parse --abbrev-ref HEAD"
+    command     = "git rev-parse --abbrev-ref HEAD"
     interpreter = ["bash", "-c"]
+
     environment = {
       BRANCH = ""
     }
 
-    on_start = ["echo Setting environment variable BRANCH", "export BRANCH=$(git rev-parse --abbrev-ref HEAD)"]
-    on_failure = ["echo Failure: $BRANCH"]
-    on_success = ["echo Success: $BRANCH"]
+    on_failure = ["echo Failure: $$BRANCH"]
+    on_success = ["echo Success: $$BRANCH"]
 
     environment = {
       BRANCH = ""
@@ -25,15 +25,15 @@ resource "aws_instance" "example"{
   }
 
   provisioner "local-exec" {
-    command = "git rev-parse --short HEAD"
+    command     = "git rev-parse --short HEAD"
     interpreter = ["bash", "-c"]
+
     environment = {
       COMMIT = ""
     }
 
-    on_start = ["echo Setting environment variable COMMIT", "export COMMIT=$(git rev-parse --short HEAD)"]
-    on_failure = ["echo Failure: $COMMIT"]
-    on_success = ["echo Success: $COMMIT"]
+    on_failure = ["echo Failure: $$COMMIT"]
+    on_success = ["echo Success: $$COMMIT"]
 
     environment = {
       COMMIT = ""
