@@ -12,7 +12,7 @@ pipeline {
         stage('Clone') {
             steps {
                 withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {
-                    git branch: 'main', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
+                    git branch: 'add_aws_cred_terraform_test', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
                 }
             }     
