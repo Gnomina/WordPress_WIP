@@ -16,12 +16,8 @@ resource "aws_instance" "example"{
       BRANCH = ""
     }
 
-    on_failure = ["echo Failure: $$BRANCH"]
-    on_success = ["echo Success: $$BRANCH"]
-
-    environment = {
-      BRANCH = ""
-    }
+    on_failure = "continue"
+    on_success = "continue"
   }
 
   provisioner "local-exec" {
@@ -32,16 +28,12 @@ resource "aws_instance" "example"{
       COMMIT = ""
     }
 
-    on_failure = ["echo Failure: $$COMMIT"]
-    on_success = ["echo Success: $$COMMIT"]
-
-    environment = {
-      COMMIT = ""
-    }
+    on_failure = "continue"
+    on_success = "continue"
   }
 
   tags = {
-    "Name" = "Branch-${local-exec.git_rev_parse.env.BRANCH}-Commit-${local-exec.git_rev_parse.env.COMMIT}"
+    "Name" = "Branch-${chomp(`git rev-parse --abbrev-ref HEAD`)}-Commit-${chomp(`git rev-parse --short HEAD`)}"
   }
   
   
