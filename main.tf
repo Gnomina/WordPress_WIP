@@ -9,7 +9,8 @@ resource "aws_instance" "example"{
   ami                    = "ami-0d5095d28a904a729"
   instance_type          = "t2.micro"
   key_name               = "WebAcademy_SSH_Key"
-  tags                   = {"Name" = "Branch-${var.branch_name}"}
+  //tags                   = {"Name" = "Branch-${var.branch_name}"}
+  tags                   = {"Name" = "${var.branch_name}"}
   vpc_security_group_ids = ["sg-0a62d8f422094f3b6"]
 }
 output "instance_public_ip" {

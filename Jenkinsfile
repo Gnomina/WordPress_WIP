@@ -73,7 +73,7 @@ pipeline {
                             echo "Public IP: ${publicIp}"
                             
                             sh 'terraform output instance_public_ip > public_ip.txt'
-
+                        }
                     }   
                 } 
             }
