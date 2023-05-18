@@ -38,8 +38,8 @@ pipeline {
                     def gitBranchOutput = sh(script: 'git branch -a -v --no-abbrev', returnStdout: true).trim()
                     def branchMatch = (gitBranchOutput =~ /\* (\S+)\s+([0-9a-f]+)\s+(.+)/)
                     def branchName = branchMatch[0][1]
-                    def commitMessage = branchMatch[0][3]
-                    echo "branch:${branchName},commit:${commitMessage}"
+                    def commit_Message = branchMatch[0][3]
+                    echo "branch:${branchName},commit:${commit_Message}"
                 }
             }
         }
