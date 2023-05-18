@@ -22,6 +22,14 @@ pipeline {
                 }
             }  
         }
+        stage("Extract Last Commit") {
+            steps {
+                script {
+                    def lastCommit = sh(script: 'git rev-parse refs/remotes/origin/terraform_update^{commit}', returnStdout: true).trim()
+                    echo "Last Commit: ${lastCommit}"
+                }
+            }
+        }
       //  stage('Repo name'){
       //      steps{
       //          script {
