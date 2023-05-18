@@ -29,23 +29,23 @@ pipeline {
         }
         
 
-        '''stage("AWS_Terraform"){
-            stages{
-                stage("Terraform_Init"){
-                    steps{
-                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-                        credentialsId: 'AWS_TOKEN',
-                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                            dir("${WORKSPACE}") {
-                                sh 'terraform init'
-                                echo 'ok'
-                            }
-                         }
-                    }
-                } 
-                 
-            }
-        }
+     //   stage("AWS_Terraform"){
+     //       stages{
+     //           stage("Terraform_Init"){
+     //               steps{
+     //                   withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
+     //                   credentialsId: 'AWS_TOKEN',
+     //                   accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+     //                   secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
+     //                       dir("${WORKSPACE}") {
+     //                           sh 'terraform init'
+     //                           echo 'ok'
+     //                       }
+     //                    }
+     //               }
+     //          } 
+     //            
+     //       }
+     //   }
     }
 }
