@@ -18,14 +18,14 @@ pipeline {
                 }
             }  
         }
-        stage('Repo name'){
-            steps{
-                script {
-                    def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-                    env.branch_name = branchName
-                }
-            }
-        }
+      //  stage('Repo name'){
+      //      steps{
+      //          script {
+      //              def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+      //              env.branch_name = branchName
+      //          }
+      //      }
+      //  }
         
 
      //   stage("AWS_Terraform"){
