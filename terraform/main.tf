@@ -24,3 +24,5 @@ resource "null_resource" "save_instance_ip" {
 //output "instance_private_ip" {
 //  value = aws_instance.example.private_ip
 //}
+
+//terraform\main.tf
