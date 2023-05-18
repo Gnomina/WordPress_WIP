@@ -15,7 +15,7 @@ pipeline {
                     git branch: 'add_aws_cred_terraform_test', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
                     sh 'commitMessage=$(git log -1 --pretty=%B)'
-                    echo 'Commit Message: $commitMessage'
+                    echo "Commit Message: $commitMessage"
                 }
             }  
         }
