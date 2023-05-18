@@ -50,7 +50,7 @@ pipeline {
       // Format the output
                def formattedOutput = "branch: ${branchName}, commit: ${commitMessage}"
       
-               echo 'formattedOutput'
+               echo formattedOutput
             }
         }
     }
