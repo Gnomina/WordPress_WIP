@@ -29,7 +29,7 @@ pipeline {
         }
         
 
-        stage("AWS_Terraform"){
+        '''stage("AWS_Terraform"){
             stages{
                 stage("Terraform_Init"){
                     steps{
