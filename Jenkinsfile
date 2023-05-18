@@ -48,7 +48,7 @@ pipeline {
                 def commitMessage = branchMatch[0][3]
       
       // Format the output
-               def formattedOutput = "branch: ${branchName}, commit: ${commitMessage}"
+               def formattedOutput = "branch:${branchName},commit:${commitMessage}"
       
                echo formattedOutput
             }
