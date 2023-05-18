@@ -24,12 +24,12 @@ pipeline {
         }
         stage("Extract branch name & Last Commit info") {
             steps {
-            script {
-                def extractScript = load "${WORKSPACE}/jenkins_jobs/extract_commit_info.groovy"
-                extractScript.extractCommitInfo("terraform_update")
+                script {
+                    def extractScript = load "${WORKSPACE}/jenkins_jobs/extract_commit_info.groovy"
+                    extractScript.extractCommitInfo("terraform_update")
+                }
             }
         }
-}
 
         
     

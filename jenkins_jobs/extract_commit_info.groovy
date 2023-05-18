@@ -1,4 +1,4 @@
-def extractCommitInfo() {
+def extractCommitInfo(branchName) {
     def lastCommitHash = sh(script: "git rev-parse refs/remotes/origin/${branchName}^{commit}", returnStdout: true).trim()
     def commitMessage = sh(script: "git log --format=%B -n 1 ${lastCommitHash}", returnStdout: true).trim()
     def commitAuthor = sh(script: "git log --format=%an -n 1 ${lastCommitHash}", returnStdout: true).trim()
