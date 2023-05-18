@@ -15,7 +15,7 @@ pipeline {
                     git branch: 'terraform_update', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
                     sh 'git rev-parse refs/remotes/origin/terraform_update^{commit}'
-                    sh 'git checkout -b terraform_update 5d21c95fbee78f5f356c5788121a6b392e680fa2'
+                    sh 'git branch -a -v --no-abbrev'
                     //"comm ${commit}"
                     
                 }
