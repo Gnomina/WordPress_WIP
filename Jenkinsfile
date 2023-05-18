@@ -37,6 +37,23 @@ pipeline {
             }
         }
     }
+    stage("Extract Branch and Commit") {
+        steps {
+            script {
+                def gitBranchOutput = sh(script: 'git branch -a -v --no-abbrev', returnStdout: true).trim()
+      
+      // Extract the branch and commit information using regular expressions
+                def branchMatch = (gitBranchOutput =~ /\* (\S+)\s+([0-9a-f]+)\s+(.+)/)
+                def branchName = branchMatch[0][1]
+                def commitMessage = branchMatch[0][3]
+      
+      // Format the output
+               def formattedOutput = "branch: ${branchName}, commit: ${commitMessage}"
+      
+               echo 'formattedOutput'
+            }
+        }
+    }
 
       //  stage('Repo name'){
       //      steps{
