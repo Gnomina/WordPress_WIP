@@ -16,6 +16,7 @@ pipeline {
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
                     sh 'git rev-parse refs/remotes/origin/terraform_update^{commit}'
                     sh 'git branch -a -v --no-abbrev'
+                    sh 'git rev-list --no-walk'
                     //"comm ${commit}"
                     
                 }
