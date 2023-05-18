@@ -35,39 +35,14 @@ pipeline {
                         credentialsId: 'AWS_TOKEN',
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                            sh 'terraform init'
-                            echo 'ok'
+                            dir(${WORKSPACE}) {
+                                sh 'terraform init'
+                                echo 'ok'
+                            }
                          }
                     }
                 } 
-                stage("Terraform_Plan"){
-                    steps{
-                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-                        credentialsId: 'AWS_TOKEN',
-                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                            sh "terraform plan -var='branch_name=${branch_Name}'"
-                            echo 'ok'
-                         }
-                    }
-                } 
-                stage("Terraform_apply"){
-                    steps{
-                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-                        credentialsId: 'AWS_TOKEN',
-                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                            sh "terraform apply -var='branch_name=${branch_Name}' -auto-approve"
-                            echo 'ok'
-                         }
-                    }
-                } 
-                stage("Instance_ip_save"){
-                    steps{  
-                        sh 'terraform output instance_public_ip > public_ip.txt'
-
-                    }   
-                } 
+                 
             }
         }
     }
