@@ -35,7 +35,7 @@ pipeline {
                         credentialsId: 'AWS_TOKEN',
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                            dir(${WORKSPACE}) {
+                            dir("${WORKSPACE}") {
                                 sh 'terraform init'
                                 echo 'ok'
                             }
