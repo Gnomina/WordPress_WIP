@@ -25,11 +25,19 @@ pipeline {
         stage("Extract Last Commit") {
             steps {
                 script {
-                    def lastCommit = sh(script: 'git rev-parse refs/remotes/origin/terraform_update^{commit}', returnStdout: true).trim()
-                    echo "Last Commit: ${lastCommit}"
-                }
+                def lastCommitHash = sh(script: 'git rev-parse refs/remotes/origin/terraform_update^{commit}', returnStdout: true).trim()
+                def commitMessage = sh(script: "git log --format=%B -n 1 ${lastCommitHash}", returnStdout: true).trim()
+                def commitAuthor = sh(script: "git log --format=%an -n 1 ${lastCommitHash}", returnStdout: true).trim()
+                def commitTimestamp = sh(script: "git log --format=%at -n 1 ${lastCommitHash}", returnStdout: true).trim()
+
+                echo "Last Commit Hash: ${lastCommitHash}"
+                echo "Commit Message: ${commitMessage}"
+                echo "Commit Author: ${commitAuthor}"
+                echo "Commit Timestamp: ${commitTimestamp}"
             }
         }
+    }
+
       //  stage('Repo name'){
       //      steps{
       //          script {
