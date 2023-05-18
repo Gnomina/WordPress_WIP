@@ -12,7 +12,7 @@ pipeline {
         stage('Clone_Github_repo') {
             steps {
                 withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {
-                    git branch: 'terraform_update', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
+                    git branch: 'add-ansible', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
                                        
                 }
