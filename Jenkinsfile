@@ -18,11 +18,16 @@ pipeline {
                 }
             }  
         }
-        stage("Extract branch name & Last Commit info") {
+        stage("Extract Branch and Commit") {
             steps {
                 script {
-                    def extractScript = load "${WORKSPACE}/jenkins_jobs/extract_commit_info.groovy"
-                    extractScript.extractCommitInfo("terraform_update")
+                    def gitBranchOutput = sh(script: 'git branch -a -v --no-abbrev', returnStdout: true).trim()
+                    def branchMatch = (gitBranchOutput =~ /\* (\S+)\s+([0-9a-f]+)\s+(.+)/)
+                    def branchName = branchMatch[0][1]
+                    def commitMessage = branchMatch[0][3]
+                    env.branch_name = branchName
+                    env.commit_Message = commitMessage
+                    echo "branch:${branchName},commit:${commitMessage}"
                 }
             }
         }
@@ -30,16 +35,7 @@ pipeline {
         
     
 
-      //  stage('Repo name'){
-      //      steps{
-      //          script {
-      //              def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-      //              env.branch_name = branchName
-      //          }
-      //      }
-      //  }
-        
-
+      
      //   stage("AWS_Terraform"){
      //       stages{
      //           stage("Terraform_Init"){
