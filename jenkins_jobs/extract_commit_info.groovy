@@ -11,9 +11,9 @@ def extractCommitInfo(branchName) {
     
     def gitBranchOutput = sh(script: 'git branch -a -v --no-abbrev', returnStdout: true).trim()
     def branchMatch = (gitBranchOutput =~ /\* (\S+)\s+([0-9a-f]+)\s+(.+)/)
-    def branchName = branchMatch[0][1]
+    def branch_Name = branchMatch[0][1]
     def commit_Message = branchMatch[0][3]
-    echo "branch:${branchName},commit:${commit_Message}"
+    echo "branch:${branch_Name},commit:${commit_Message}"
 }
 
 return this
