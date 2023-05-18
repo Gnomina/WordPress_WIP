@@ -14,6 +14,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {
                     git branch: 'terraform_update', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"
+                    echo "comm ${commit}"
                     
                 }
             }  
