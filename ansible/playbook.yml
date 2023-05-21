@@ -1,6 +1,6 @@
 ---
 - name:
-  hosts: servers
+  hosts: web
   become: yes
   tasks:
     
