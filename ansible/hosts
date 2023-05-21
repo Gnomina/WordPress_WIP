@@ -1,6 +1,5 @@
-[servers]
-ansible_ec2_test ansible_host=18.156.173.100
-18.156.173.100 ansible_ec2_test=ansible_host
-
-[all]
-servers
+---
+servers:
+  hosts:
+    server1:
+      ansible_host: 18.156.173.100
