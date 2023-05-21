@@ -38,6 +38,8 @@ pipeline {
                         inventory: "${WORKSPACE}/inventory",
                         playbook: "${WORKSPACE}/playbook.yml",
                         credentialsId: '8e61ea52-e401-4218-87fe-330152500d72'
+                        sshUserPrivateKey: ubuntu
+                        
                         
                     )
                 }
