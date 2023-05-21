@@ -37,8 +37,10 @@ pipeline {
                     ansiblePlaybook(
                         inventory: "${WORKSPACE}/inventory",
                         playbook: "${WORKSPACE}/playbook.yml",
-                        credentialsId: '8e61ea52-e401-4218-87fe-330152500d72'
-                        remoteUser: 'ubuntu'
+                        credentialsId: '8e61ea52-e401-4218-87fe-330152500d72',
+                        extraVars: [
+                            ansible_ssh_user: 'ubuntu'
+                        ]
                         
                         
                     )
