@@ -35,8 +35,8 @@ pipeline {
             steps {
                 ansiblePlaybook(
                     withCredentials([sshUserPrivateKey(credentialsId: '8e61ea52-e401-4218-87fe-330152500d72', keyFileVariable: 'SSH_KEY')]){
-                        playbook: "${WORKSPACE}/ansible/playbook.yml"
-                        inventory: "${WORKSPACE}/ansible/inventory"
+                        playbook: "${WORKSPACE}"
+                        inventory: "${WORKSPACE}"
                     
                     }
                 )
