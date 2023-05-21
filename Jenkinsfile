@@ -33,13 +33,15 @@ pipeline {
         }
         stage("Ansible"){
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu_key', keyFileVariable: 'SSH_KEY')]) {
-                    dir("${WORKSPACE}/ansible") {
-                        sh 'ansible-playbook -i hosts playbook.yml --private-key=${SSH_KEY} -u ubuntu '// Запуск Ansible.
-                    }
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
+                    credentialsId: 'AWS_TOKEN', 
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
+                        dir("${WORKSPACE}") {
+                            sh 'ansible-playbook -i inventory/hosts playbook.yml '
+                        
+                    }        
                 }
-                //}
-                
             }
         }
 
