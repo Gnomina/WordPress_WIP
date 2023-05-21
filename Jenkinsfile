@@ -46,7 +46,7 @@ pipeline {
             steps {
                 sshagent(['ubuntu_key']) {
                     dir("${WORKSPACE}/ansible") {
-                        sh 'ansible-playbook -i inventory playbook.yml --ssh-extra-args="-o StrictHostKeyChecking=no"'
+                        sh 'ansible-playbook -i inventory playbook.yml --ssh-extra-args="-o StrictHostKeyChecking=no" --user=ubuntu'
                     }
                 }
 
