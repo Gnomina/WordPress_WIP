@@ -34,8 +34,8 @@ pipeline {
         stage("Ansible"){
             steps {
                 ansiblePlaybook(
-                    inventory: '/ansible/hosts.ini',
-                    playbook: '/ansible/playbook.yml',
+                    inventory: "${WORKSPACE}/ansible/hosts.ini",
+                    playbook: "${WORKSPACE}/ansible/playbook.yml'"
                     credentialsId: '8e61ea52-e401-4218-87fe-330152500d72'
                     //extras: '--private-key=/path/to/your/private_key.pem'
                 )
