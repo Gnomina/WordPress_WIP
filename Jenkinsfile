@@ -33,11 +33,11 @@ pipeline {
         }
         stage("Ansible"){
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: '8e61ea52-e401-4218-87fe-330152500d72', keyFileVariable: 'SSH_KEY')]) {
+               // withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu_key', keyFileVariable: 'SSH_KEY')]) {
                     ansiblePlaybook(
                         inventory: "${WORKSPACE}/inventory",
                         playbook: "${WORKSPACE}/playbook.yml",
-                        credentialsId: '8e61ea52-e401-4218-87fe-330152500d72',
+                        credentialsId: 'ubuntu_key',
                         extraVars: [
                             ansible_ssh_user: 'ubuntu'
                         ]
