@@ -35,7 +35,9 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: '8e61ea52-e401-4218-87fe-330152500d72', keyFileVariable: 'SSH_KEY')]) {
                     ansiblePlaybook(
-                        sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${WORKSPACE}/inventory --private-key ${SSH_KEY} ${WORKSPACE}/playbook.yml'
+                        sh """
+                           ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i \${WORKSPACE}/inventory --private-key \${SSH_KEY} \${WORKSPACE}/playbook.yml
+                           """
                     )
                 }
                 
