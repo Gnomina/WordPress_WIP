@@ -44,11 +44,13 @@ pipeline {
         //}
         stage("Ansible"){
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu_key', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USERNAME')]) {
-                    sh 'ansible-playbook -i hosts playbook.yml --private-key=${SSH_KEY} --user=${SSH_USERNAME}'
+                sshagent(['ubuntu_key']) {
+                    dir("${WORKSPACE}/ansible") {
+                        sh 'ansible-playbook -i hosts playbook.yml'
+                    }
                 }
-            }          
-        }
+
+            }
 
 
 
