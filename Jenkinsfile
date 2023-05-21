@@ -35,7 +35,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu_key', keyFileVariable: 'SSH_KEY')]) {
                     dir("${WORKSPACE}/ansible") {
-                        sh 'ansible-playbook -i hosts playbook.yml --private-key=${SSH_KEY} --key-no-validate -u ubuntu '// Запуск Ansible.
+                        sh 'ansible-playbook -i hosts playbook.yml --private-key=${SSH_KEY} -u ubuntu '// Запуск Ansible.
                     }
                 }
                 //}
