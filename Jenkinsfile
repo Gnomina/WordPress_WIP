@@ -44,7 +44,7 @@ pipeline {
         //}
         stage("Ansible"){
             steps {
-                sshUserPrivateKey(credentialsId: 'your_credentials_id', usernameVariable: 'SSH_USERNAME') {
+                sshUserPrivateKey(credentialsId: 'your_credentials_id', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USERNAME') {
                     sh 'ansible-playbook -i hosts playbook.yml --private-key=${SSH_KEY} --user=${SSH_USERNAME}'
                 }
             }          
