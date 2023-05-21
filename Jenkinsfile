@@ -11,6 +11,7 @@ pipeline {
         
         stage('Clone_Github_repo') {// Клонирование репозитория.
             steps {
+                //git credentialsId: 'vagrant_git', url: 'https://github.com/Gnomina/WordPress_WIP.git'
                 withCredentials([string(credentialsId: 'vagrant_git', variable: 'token')]) {// Подключение к GitHub.
                     git branch: 'add-ansible', url: "https://Gnomina:${token}@github.com/Gnomina/WordPress_WIP.git"
                     echo "Клонированный репозиторий находится в папке: ${WORKSPACE}"//// Вывод пути к клонированному репозиторию.
@@ -30,24 +31,38 @@ pipeline {
                 }
             }
         }
-      
-        stage("AWS_Instance Creation"){ // Создание инстанса в AWS с помощью Terraform.
-            stages{
-                stage("Terraform_Init"){
-                    steps{
-                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',// Подключение к AWS.  
-                        credentialsId: 'AWS_TOKEN',// Используемый токен. 
-                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',// Переменная с токеном. 
-                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){// Переменная с секретным ключом. 
-                            dir("${WORKSPACE}") {// Переход в рабочую директорию.
-                                sh 'terraform init'// Инициализация Terraform.
-                                echo 'ok'// Вывод сообщения об успешной инициализации.
-                            }
-                         }
-                    }
-                } 
-                 
+        stage("Ansible"){
+            steps {
+                ansiblePlaybook(
+                    inventory: '/ansible/hosts.ini',
+                    playbook: '/ansible/playbook.yml',
+                    credentialsId: '8e61ea52-e401-4218-87fe-330152500d72'
+                    //extras: '--private-key=/path/to/your/private_key.pem'
+                )
             }
         }
+
+
+
+
+      
+//        stage("AWS_Instance Creation"){ // Создание инстанса в AWS с помощью Terraform.
+//            stages{
+//                stage("Terraform_Init"){
+//                    steps{
+//                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',// Подключение к AWS.  
+//                        credentialsId: 'AWS_TOKEN',// Используемый токен. 
+//                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',// Переменная с токеном. 
+//                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){// Переменная с секретным ключом. 
+//                            dir("${WORKSPACE}") {// Переход в рабочую директорию.
+//                                sh 'terraform init'// Инициализация Terraform.
+//                                echo 'ok'// Вывод сообщения об успешной инициализации.
+//                            }
+//                         }
+//                    }
+//                } 
+//                 
+//            }
+//        }
     }
 }
