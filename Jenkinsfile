@@ -31,20 +31,24 @@ pipeline {
                 }
             }
         }
+        //stage("Ansible"){
+        //    steps {
+        //        withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu_key', keyFileVariable: 'SSH_KEY')]) {
+        //            dir("${WORKSPACE}/ansible") {
+        //                sh 'ansible-playbook -i hosts playbook.yml --private-key=${SSH_KEY} '// Запуск Ansible.
+        //            }
+        //        }
+                //}
+                
+        //    }
+        //}
         stage("Ansible"){
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-                    credentialsId: 'AWS_TOKEN', 
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
-                        dir("${WORKSPACE}") {
-                            sh 'ansible-playbook -i hosts playbook.yml'
-                        
-                    }        
+                sshUserPrivateKey(credentialsId: 'your_credentials_id', usernameVariable: 'SSH_USERNAME') {
+                    sh 'ansible-playbook -i hosts playbook.yml --private-key=${SSH_KEY} --user=${SSH_USERNAME}'
                 }
-            }
+            }          
         }
-
 
 
 
