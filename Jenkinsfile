@@ -33,14 +33,11 @@ pipeline {
         }
         stage("Ansible"){
             steps {
-               // withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu_key', keyFileVariable: 'SSH_KEY')]) {
-                    ansiblePlaybook(
-                        inventory: "${WORKSPACE}/inventory",
-                        playbook: "${WORKSPACE}/playbook.yml",
-                        credentialsId: "ubuntu_key"
-                                             
-                        
-                    )
+                withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu_key', keyFileVariable: 'SSH_KEY')]) {
+                    dir("${WORKSPACE}/ansible") {
+                        sh 'ansible-playbook -i hosts playbook.yml --private-key=${SSH_KEY}'// Запуск Ansible.
+                    }
+                }
                 //}
                 
             }
