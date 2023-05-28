@@ -16,7 +16,6 @@ sudo apt-get install jenkins -y
 
 sudo systemctl start jenkins
 sudo systemctl enable jenkins
-sudo systemctl status jenkins
 
 #-------------------------ansible installation-------------------------#
 
@@ -50,10 +49,15 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io
 sudo usermod -aG docker $USER
 sudo systemctl enable docker
 
-
+echo " ----------------Installation completed successfully----------------"
 java --version
+echo "--------------------------------------------------------------------"
 jenkins --version
+echo "--------------------------------------------------------------------"
 ansible --version
+echo "--------------------------------------------------------------------"
 terraform --version
+echo "--------------------------------------------------------------------"
 docker --version
+echo "--------------------------------------------------------------------"
 
