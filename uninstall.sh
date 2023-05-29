@@ -11,10 +11,9 @@ if sudo apt list --installed jenkins 2>/dev/null | grep -q "^jenkins"; then
     sudo systemctl disable jenkins
     sudo apt-get remove --purge jenkins -y
     sudo apt-get autoremove -y
-    sudo userdel jenkins
-
-    
+   
     echo "Package uninstalled"
+
 else
     echo "Package not installed. Skipping uninstallation"
 fi
