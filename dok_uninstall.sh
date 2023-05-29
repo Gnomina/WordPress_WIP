@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo " "
 echo "--------------------Docker uninstallation--------------------"
 echo " "
