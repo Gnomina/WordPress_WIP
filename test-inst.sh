@@ -52,7 +52,7 @@ else
     sudo systemctl enable terraform
 fi
 #-------------------------Docker installation-------------------------#
-if sudo apt list --installed docker 2>/dev/null | grep -q "^docker"; then
+if command -v docker &> /dev/null; then
     echo "Package already installed. Skip instalation"
 else
     echo "Package not installed. Install package"
