@@ -64,3 +64,4 @@ else
 fi
 echo " "
 echo "--------------------Uninstallation complete--------------------"
+echo " "
