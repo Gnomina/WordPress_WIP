@@ -1,6 +1,9 @@
 #!/bin/bash
 
 #-------------------------jenkins installation-------------------------#
+echo " "
+echo "-----------------Jenkins----------------------------------------------"
+echo " "
 if sudo apt list --installed jenkins 2>/dev/null | grep -q "^jenkins"; then
     echo "Package already installed. Skipping installation"
 else
@@ -23,6 +26,9 @@ else
     sudo systemctl enable jenkins
 fi
 #-------------------------ansible installation-------------------------#
+echo " " 
+echo "-----------------Ansible----------------------------------------------"
+echo " "
 if sudo apt list --installed ansible 2>/dev/null | grep -q "^ansible"; then
     echo "Package already installed. Skipping installation"
 else
@@ -32,10 +38,12 @@ else
     sudo apt-get install software-properties-common -y
     sudo apt-add-repository --yes --update ppa:ansible/ansible
     sudo apt-get install ansible -y
-    sudo systemctl start ansible
-    sudo systemctl enable ansible
+        
 fi
 #-------------------------Terrform installation-------------------------#
+echo " "
+echo "-----------------Terraform--------------------------------------------"
+echo " "
 if command -v terraform &> /dev/null; then
     echo "Package already installed. Skipping installation."
 else
@@ -53,13 +61,16 @@ else
     terraform --version
 fi
 #-------------------------Docker installation-------------------------#
+echo " "
+echo "-----------------Docker-----------------------------------------------"
+echo " "
 if command -v docker &> /dev/null; then
     echo "Package already installed. Skipping installation"
 else
     echo "Package not installed. Install package"
     sudo apt-get update
     sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    sudo curl -fsSL -o /usr/share/keyrings/docker-archive-keyring.gpg https://download.docker.com/linux/ubuntu/gpg
     sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
     sudo apt install -y docker-ce docker-ce-cli containerd.io
