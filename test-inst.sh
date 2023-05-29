@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #-------------------------jenkins installation-------------------------#
-if apt list --installed jenkins 2>/dev/null | grep -q "^jenkins"; then
+if sudo apt list --installed jenkins 2>/dev/null | grep -q "^jenkins"; then
     echo "Package already installed. Skip instalation"
 else
     echo "Package not installed. Install package"
@@ -23,7 +23,7 @@ else
     sudo systemctl enable jenkins
 fi
 #-------------------------ansible installation-------------------------#
-if apt list --installed ansible 2>/dev/null | grep -q "^ansible"; then
+if sudo apt list --installed ansible 2>/dev/null | grep -q "^ansible"; then
     echo "Package already installed. Skip instalation"
 else
     echo "Package not installed. Install package"
@@ -35,7 +35,7 @@ else
     sudo systemctl enable ansible
 fi
 #-------------------------Terrform installation-------------------------#
-if apt list --installed terraform 2>/dev/null | grep -q "^terraform"; then
+if sudo apt list --installed terraform 2>/dev/null | grep -q "^terraform"; then
     echo "Package already installed. Skip instalation"
 else
     echo "Package not installed. Install package"
@@ -51,7 +51,7 @@ else
     sudo systemctl enable terraform
 fi
 #-------------------------Docker installation-------------------------#
-if apt list --installed docker 2>/dev/null | grep -q "^docker"; then
+if sudo apt list --installed docker 2>/dev/null | grep -q "^docker"; then
     echo "Package already installed. Skip instalation"
 else
     echo "Package not installed. Install package"
