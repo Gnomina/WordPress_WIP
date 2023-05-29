@@ -35,7 +35,7 @@ else
     sudo systemctl enable ansible
 fi
 #-------------------------Terrform installation-------------------------#
-if apt list --installed terraform 2>/dev/null | grep -q "^terrform"; then
+if apt list --installed terraform 2>/dev/null | grep -q "^terraform"; then
     echo "Package already installed. Skip instalation"
 else
     echo "Package not installed. Install package"
