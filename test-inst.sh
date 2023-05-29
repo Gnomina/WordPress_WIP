@@ -2,7 +2,7 @@
 
 #-------------------------jenkins installation-------------------------#
 if sudo apt list --installed jenkins 2>/dev/null | grep -q "^jenkins"; then
-    echo "Package already installed. Skip instalation"
+    echo "Package already installed. Skipping installation"
 else
     echo "Package not installed. Install package"
     
@@ -24,7 +24,7 @@ else
 fi
 #-------------------------ansible installation-------------------------#
 if sudo apt list --installed ansible 2>/dev/null | grep -q "^ansible"; then
-    echo "Package already installed. Skip instalation"
+    echo "Package already installed. Skipping installation"
 else
     echo "Package not installed. Install package"
     
@@ -36,7 +36,7 @@ else
 fi
 #-------------------------Terrform installation-------------------------#
 if command -v terraform &> /dev/null; then
-    echo "Package already installed. Skip installation."
+    echo "Package already installed. Skipping installation."
 else
     echo "Package not installed. Installing package..."
     TERRAFORM_VERSION="1.4.6"
@@ -53,7 +53,7 @@ else
 fi
 #-------------------------Docker installation-------------------------#
 if command -v docker &> /dev/null; then
-    echo "Package already installed. Skip instalation"
+    echo "Package already installed. Skipping installation"
 else
     echo "Package not installed. Install package"
     sudo apt-get update
@@ -65,7 +65,7 @@ else
     sudo usermod -aG docker $USER
     sudo systemctl enable docker
 fi
-echo " ----------------Installation completed successfully----------------"
+echo "-----------------All packages already installed---------------------"
 java --version
 echo "--------------------------------------------------------------------"
 jenkins --version
