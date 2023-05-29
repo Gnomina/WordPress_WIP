@@ -1,6 +1,9 @@
 #!/bin/bash
 
 #-------------------------jenkins uninstallation-------------------------#
+echo " "
+echo "--------------------Jenkins uninstallation--------------------"
+echo " "
 if sudo apt list --installed jenkins 2>/dev/null | grep -q "^jenkins"; then
     echo "Package installed. Uninstalling package"
     
@@ -17,6 +20,9 @@ else
 fi
 
 #-------------------------ansible uninstallation-------------------------#
+echo " "
+echo "--------------------Ansible uninstallation--------------------"
+echo " "
 if sudo apt list --installed ansible 2>/dev/null | grep -q "^ansible"; then
     echo "Package installed. Uninstalling package"
     
@@ -29,6 +35,9 @@ else
 fi
 
 #-------------------------terraform uninstallation-------------------------#
+echo " "
+echo "--------------------Terraform uninstallation--------------------"
+echo " "
 if command -v terraform &> /dev/null; then
     echo "Package installed. Uninstalling package"
     
@@ -40,6 +49,9 @@ else
 fi
 
 #-------------------------docker uninstallation-------------------------#
+echo " "
+echo "--------------------Docker uninstallation--------------------"
+echo " "
 if command -v docker &> /dev/null; then
     echo "Package installed. Uninstalling package"
     
@@ -50,3 +62,4 @@ if command -v docker &> /dev/null; then
 else
     echo "Package not installed. Skipping uninstallation"
 fi
+echo "--------------------Uninstallation complete--------------------"
