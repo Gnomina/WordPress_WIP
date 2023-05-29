@@ -32,6 +32,7 @@ else
     sudo apt-get install software-properties-common -y
     sudo apt-add-repository --yes --update ppa:ansible/ansible
     sudo apt-get install ansible -y
+    sudo systemctl start ansible
     sudo systemctl enable ansible
 fi
 #-------------------------Terrform installation-------------------------#
@@ -49,7 +50,7 @@ else
     sudo mv $TERRAFORM_TMP_DIR/terraform /usr/local/bin/
 
     sudo rm -rf $TERRAFORM_TMP_DIR
-    sudo systemctl enable terraform
+    terraform --version
 fi
 #-------------------------Docker installation-------------------------#
 if command -v docker &> /dev/null; then
@@ -58,11 +59,12 @@ else
     echo "Package not installed. Install package"
     sudo apt-get update
     sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    apt update
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
     sudo apt install -y docker-ce docker-ce-cli containerd.io
     sudo usermod -aG docker $USER
+    sudo systemctl start docker
     sudo systemctl enable docker
 fi
 echo " "
