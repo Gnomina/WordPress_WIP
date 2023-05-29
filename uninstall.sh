@@ -62,4 +62,5 @@ if command -v docker &> /dev/null; then
 else
     echo "Package not installed. Skipping uninstallation"
 fi
+echo " "
 echo "--------------------Uninstallation complete--------------------"
