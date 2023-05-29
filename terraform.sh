@@ -1,6 +1,6 @@
 
 
-if if command -v terraform &> /dev/null; then
+if command -v terraform &> /dev/null; then
     echo "Package already installed. Skip installation."
 else
     echo "Package not installed. Installing package..."
