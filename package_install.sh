@@ -10,7 +10,7 @@ else
     echo "Package not installed. Install package"
     
     sudo apt-get update
-    sudo apt-get install openjdk-11-jdk -y
+    sudo apt-get install -y openjdk-11-jdk
 
     curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
                /usr/share/keyrings/jenkins-keyring.asc > /dev/null
@@ -52,6 +52,8 @@ else
     TERRAFORM_URL="https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
     TERRAFORM_TMP_DIR="/tmp/terraform"
     
+    sudo apt-get install wget -y
+    sduo apt-get install unzip -y
     sudo mkdir -p $TERRAFORM_TMP_DIR
     sudo wget -O $TERRAFORM_TMP_DIR/terraform.zip $TERRAFORM_URL
     sudo unzip $TERRAFORM_TMP_DIR/terraform.zip -d $TERRAFORM_TMP_DIR
