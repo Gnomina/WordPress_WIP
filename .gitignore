@@ -2,3 +2,5 @@ Jenkinsfile copy 2
 Jenkinsfile copy
 trash
 pod.yaml
+docker_intall.sh
+minikube_install_20.04.sh
